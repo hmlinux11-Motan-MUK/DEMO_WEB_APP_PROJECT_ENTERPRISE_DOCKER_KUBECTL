@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MUK.cloud Login</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="overlay"></div>
+
+  <div class="container">
+    <div class="branding">
+      <h1>MUK<span>.cloud</span></h1>
+      <p>Cloud Solutions • Managed Services • Secure Infrastructure</p>
+    </div>
+
+    <div class="login-card">
+      <h2>Login Portal</h2>
+      <p class="subtitle">Access your MUK.cloud dashboard</p>
+
+      <form id="loginForm">
+        <input type="text" id="username" placeholder="Username" required />
+        <input type="password" id="password" placeholder="Password" required />
+        <button type="submit">Login</button>
+      </form>
+
+      <div id="message"></div>
+
+     <div id="dashboard" class="hidden">
+       <h3>Welcome to MUK.cloud</h3>
+       <p id="welcomeText"></p>
+
+       <div class="dashboard-stats">
+        <div class="stat-box">
+         <h4>Total Users</h4>
+         <p id="totalUsers">0</p>
+       </div>
+
+       <div class="stat-box">
+        <h4>Cloud Status</h4>
+        <p id="cloudStatus">-</p>
+      </div>
+
+      <div class="stat-box">
+       <h4>Active Services</h4>
+       <p id="activeServices">0</p>
+     </div>
+
+     <div class="stat-box">
+       <h4>Uptime</h4>
+       <p id="uptime">-</p>
+     </div>
+   </div>
+
+   <button id="logoutBtn">Logout</button>
+</div>
+
+  <script src="app.js"></script>
+</body>
+</html>

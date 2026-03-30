@@ -1,0 +1,41 @@
+services:
+  app:
+    build: .
+    container_name: muk-app
+    ports:
+      - "5000:5000"
+    environment:
+      PORT: 5000
+      MONGO_URI: mongodb://HMadmin:HMpass@mongo:27017/hamza-db?authSource=admin
+      DB_NAME: hamza-db
+    depends_on:
+      - mongo
+    restart: unless-stopped
+
+  mongo:
+    image: mongo:7
+    container_name: mongo
+    ports:
+      - "27017:27017"
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: HMadmin
+      MONGO_INITDB_ROOT_PASSWORD: HMpass
+    volumes:
+      - mongo_data:/data/db
+    restart: unless-stopped
+
+  mongo-express:
+    image: mongo-express:latest
+    container_name: mongo-express
+    ports:
+      - "8081:8081"
+    environment:
+      ME_CONFIG_MONGODB_URL: mongodb://HMadmin:HMpass@mongo:27017/?authSource=admin
+      ME_CONFIG_BASICAUTH_USERNAME: HMadmin
+      ME_CONFIG_BASICAUTH_PASSWORD: HMpass
+    depends_on:
+      - mongo
+    restart: unless-stopped
+
+volumes:
+  mongo_data:

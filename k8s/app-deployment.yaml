@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: muk-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: muk-app
+  template:
+    metadata:
+      labels:
+        app: muk-app
+    spec:
+      containers:
+        - name: muk-app
+          image: hmlinux11/muk-cloud-app:1.0
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 5000
+          env:
+            - name: PORT
+              value: "5000"
+            - name: DB_NAME
+              valueFrom:
+                secretKeyRef:
+                  name: mongo-secret
+                  key: db-name
+            - name: MONGO_URI
+              value: "mongodb://HMadmin:HMpass@mongo:27017/hamza-db?authSource=admin"
+          livenessProbe:
+            httpGet:
+              path: /api/health
+              port: 5000
+            initialDelaySeconds: 10
+            periodSeconds: 10
+          readinessProbe:
+            httpGet:
+              path: /api/health
+              port: 5000
+            initialDelaySeconds: 5
+            periodSeconds: 5

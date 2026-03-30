@@ -75,4 +75,4 @@ Backend: http://localhost:5000
 
 👨‍💻 Author
 Hamza Motan
-Cloud & DevOps Engineer
+Cloud Architect
